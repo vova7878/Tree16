@@ -13,7 +13,14 @@ public:
     Tree16() {
         memset(data, 0, sizeof (data));
     }
-    ~Tree16() = default;
+
+    ~Tree16() {
+        for (int i = 0; i < 16; i++) {
+            if (data[i] != nullptr) {
+                delete data[i];
+            }
+        }
+    }
 
     bool isFull() {
         return full;
