@@ -3,6 +3,7 @@
 
 #include "jtypes.hpp"
 #include <stdexcept>
+#include <cstring>
 
 template<typename T, unsigned int level>
 class Tree16 {
@@ -10,9 +11,7 @@ class Tree16 {
 public:
 
     Tree16() {
-        for (int i = 0; i < 16; i++) {
-            data[i] = nullptr;
-        }
+        memset(data, 0, sizeof (data));
     }
     ~Tree16() = default;
 
@@ -128,9 +127,7 @@ class Tree16<T, 0> {
 public:
 
     Tree16() {
-        for (int i = 0; i < 16; i++) {
-            data[i] = nullptr;
-        }
+        memset(data, 0, sizeof (data));
     }
     ~Tree16() = default;
 
