@@ -60,7 +60,7 @@ public:
                     }
                     u4 tmp_position = child->put(value);
                     out = (tmp_position << 4) | i;
-                    if (!child-->isFull()) {
+                    if (!child->isFull()) {
                         tmp_full = false;
                         break;
                     }
@@ -102,7 +102,7 @@ public:
     T* get(u4 position) {
         u4 index = position & 0b1111;
         data_type* child = data[index];
-        return child == nullptr ? T() : child->get(position >> 4);
+        return child == nullptr ? nullptr : child->get(position >> 4);
     }
 
     T* remove(u4 position) {
