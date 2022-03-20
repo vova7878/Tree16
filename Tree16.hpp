@@ -129,7 +129,7 @@ private:
         exists = 0;
         data = reinterpret_cast<data_type*> (malloc(sizeof (data_type) * 16));
         if (data == nullptr) {
-            throw TreeException("Cannot allocate tree data");
+            throw TreeException("Unable to allocate tree data");
         }
     }
 
@@ -201,7 +201,7 @@ private:
         full = 0;
         data = reinterpret_cast<T*> (malloc(sizeof (T) * 16));
         if (data == nullptr) {
-            throw TreeException("Cannot allocate tree data");
+            throw TreeException("Unable to allocate tree data");
         }
     }
 
