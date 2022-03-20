@@ -120,12 +120,12 @@ private:
     }
 
     void exit() {
-        for (int i = 0; i < 16; i++) {
-            if (getFlag(exists, i)) {
-                data[i].exit();
-            }
-        }
         if (data != nullptr) {
+            for (int i = 0; i < 16; i++) {
+                if (getFlag(exists, i)) {
+                    data[i].exit();
+                }
+            }
             free(data);
         }
     }
