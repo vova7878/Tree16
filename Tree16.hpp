@@ -1,8 +1,22 @@
 #ifndef TREE16_HPP
 #define TREE16_HPP
 
+#include <cstdlib>
+#include <exception>
 #include "jtypes.hpp"
-#include <stdexcept>
+
+class TreeException : public std::exception {
+    const char *msg;
+
+public:
+
+    TreeException(const char* why) : msg(why) {
+    }
+
+    virtual const char* what() const noexcept {
+        return msg;
+    }
+};
 
 u2 numberOfTrailingZeros(u2 i) {
     // HD, Figure 5-14
@@ -59,7 +73,7 @@ public:
     u4 put(T value) {
         u4 index = numberOfTrailingZeros(~full);
         if (index == 16) {
-            throw std::runtime_error("Unable to put object, tree is full");
+            throw TreeException("Unable to put object, tree is full");
         }
         if (!getFlag(exists, index)) {
             if (value == nullValue) {
@@ -115,7 +129,7 @@ private:
         exists = 0;
         data = reinterpret_cast<data_type*> (malloc(sizeof (data_type) * 16));
         if (data == nullptr) {
-            throw std::bad_alloc();
+            throw TreeException("Cannot allocate tree data");
         }
     }
 
@@ -159,7 +173,7 @@ public:
     u4 put(T value) {
         u4 index = numberOfTrailingZeros(~full);
         if (index == 16) {
-            throw std::runtime_error("Unable to put object, tree is full");
+            throw TreeException("Unable to put object, tree is full");
         }
         data[index] = value;
         setFlag(full, index, value != nullValue);
@@ -187,7 +201,7 @@ private:
         full = 0;
         data = reinterpret_cast<T*> (malloc(sizeof (T) * 16));
         if (data == nullptr) {
-            throw std::bad_alloc();
+            throw TreeException("Cannot allocate tree data");
         }
     }
 
